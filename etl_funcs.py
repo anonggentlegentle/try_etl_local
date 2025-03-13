@@ -1,4 +1,5 @@
 import pandas as pd
+import openpyxl
 from datetime import datetime
 
 def extract_times(file_path, col_names):
@@ -15,12 +16,10 @@ def transform_name(transform_df):
 
     fullname_df["Entry"] = pd.to_datetime(fullname_df["Entry"])
 
-    print(fullname_df.dtypes)
-
     return fullname_df
 
-def load_to_csv(dataframe, file_path):
-    dataframe.to_csv(file_path, mode="w")
+def load_to_excel(dataframe, file_path):
+    dataframe.to_excel(file_path, engine="openpyxl", index=False)
 
 if __name__ == "__main__":
     print("Not to be used on it's own, functions must be imported")
