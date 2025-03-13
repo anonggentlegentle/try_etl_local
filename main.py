@@ -3,7 +3,9 @@ from excel_formatting import format_excel_file
 
 time_cols = ["id", "First Name", "Last Name", "Biometrics", "Time", "Date"]
 
-file = "03-13-2025"
+f = open("C:\\Users\\USER\\Desktop\\file_name.txt", "r")
+
+file = f.readline()
 
 time_path = f"C:\\Users\\USER\\Desktop\\{file}.csv"
 

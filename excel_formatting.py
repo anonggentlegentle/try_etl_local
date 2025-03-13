@@ -1,5 +1,5 @@
 from openpyxl import load_workbook
-from openpyxl.styles import PatternFill, Font
+from openpyxl.styles import PatternFill, Font, Border, Side
 from openpyxl.formatting.rule import CellIsRule, ColorScaleRule, FormulaRule, Rule
 from openpyxl.styles.differential import DifferentialStyle
 
@@ -24,6 +24,21 @@ def format_excel_file(path):
             if cell.value:
                 max_length = max(max_length, len(str(cell.value)))
         ws.column_dimensions[col_letter].width = max_length + 2
+
+    last_row = ws.max_row
+    last_column = ws.max_column
+    last_column_letter = ws.cell(row=1, column=last_column).column_letter
+
+    thin_border = Border(
+        left=Side(style="thin"),
+        right=Side(style="thin"),
+        top=Side(style="thin"),
+        bottom=Side(style="thin")
+    )
+
+    for row in ws.iter_rows(min_row=1, max_row=last_row, min_col=1, max_col=last_column):
+        for cell in row:
+            cell.border = thin_border
 
     wb.save(path)
 
