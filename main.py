@@ -13,7 +13,7 @@ while True:
 
         final_file_path = file_path.replace("/", "\\")
 
-        # Executing the functions to extract data, transform data, load and format the final excel file
+        # Executing the functions to extract data, transform data, load and format the final Excel file
         df_extract = extract_times(file_path, time_cols)
 
         transformed_df = transform_name(df_extract)
