@@ -5,19 +5,15 @@ from tkinter.filedialog import askopenfilename, askdirectory
 
 while True:
     try:
-        # print("Enter the CSV filename in 'MM-DD-YYYY' format :")
-        # file_name = input()
-
+        # Defining the rows of the dataframe
         time_cols = ["id", "First Name", "Last Name", "Biometrics", "Time", "Date"]
 
-        # time_path = f"C:\\Users\\USER\\Desktop\\{file_name}.csv"
-
-        # new_time_path = f"C:\\Users\\USER\\Desktop\\{file_name}-NEW.xlsx"
-
+        # Defining the paths of the file to transform and the final file
         file_path = askopenfilename().replace("/", "\\")
 
         final_file_path = file_path.replace("/", "\\")
 
+        # Executing the functions to extract data, transform data, load and format the final excel file
         df_extract = extract_times(file_path, time_cols)
 
         transformed_df = transform_name(df_extract)

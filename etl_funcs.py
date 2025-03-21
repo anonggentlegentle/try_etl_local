@@ -1,29 +1,28 @@
 import pandas as pd
-import openpyxl
-from datetime import datetime
-from tkinter.filedialog import askopenfilename, askdirectory
 from excel_formatting import format_excel_file
 
+# Extracting the data from csv file into a dataframe
 def extract_times(file_path, col_names):
     time_df = pd.read_csv(file_path, names=col_names, skiprows=1)
 
     return time_df
 
+# Transforming the extracted dataframe
 def transform_name(transform_df):
+    # Create Full Name column from the First Name and Last Name columns
     transform_df["Full Name"] = transform_df["First Name"].values + " " + transform_df["Last Name"].values
 
-    # transform_df["Entry"] = transform_df["Date"].values + " " + transform_df["Time"].values
-
+    # Create Entry column which consists of the Date and Time columns
     transform_df["Entry"] = pd.to_datetime(transform_df["Date"] + " " + transform_df["Time"], format="mixed")
 
+    # Only get the id, Full Name, Biometrics, and Entry columns for the transformed dataframe
     fullname_df = transform_df.loc[:, ["id", "Full Name", "Biometrics", "Entry"]]
-
-    # fullname_df["Entry"] = pd.to_datetime(fullname_df["Entry"], format="%d-%b-%Y %H:%M:%S")
 
     return fullname_df
 
+# Loading the transformed dataframe to Excel file and formatting the final Excel file
 def load_to_excel(dataframe, final_file_path):
-    final_file = final_file_path.replace(".csv", "-NEW.xlsx")
+    final_file = final_file_path.replace(".csv", "-CONVERTED.xlsx")
 
     dataframe.to_excel(final_file, engine="openpyxl", index=False)
 

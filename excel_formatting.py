@@ -3,6 +3,7 @@ from openpyxl.styles import PatternFill, Font, Border, Side
 from openpyxl.formatting.rule import CellIsRule, ColorScaleRule, FormulaRule, Rule
 from openpyxl.styles.differential import DifferentialStyle
 
+# Formatting the final excel file
 def format_excel_file(path):
     red_fill = PatternFill(start_color="FFEE1111", end_color="FFEE1111", fill_type="solid")
     bold_font = Font(bold=True)
